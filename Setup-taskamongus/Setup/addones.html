@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add-ons - Tasks Among Us</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #1a1a1a, #2c3e50, #1a1a1a, #2c3e50);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1.5s ease-out;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Fade In Animation */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Header Styles */
+        h1 {
+            font-size: 3.5em;
+            color: #ff6f61;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            animation: slideInFromTop 1s ease-out;
+        }
+
+        @keyframes slideInFromTop {
+            0% { transform: translateY(-100px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Section Header */
+        .section-header {
+            font-size: 2.5em;
+            margin: 40px 0;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 4px;
+            background: #ff6f61;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Notice Style */
+        .info-notice {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            animation: slideIn 1.5s ease-out;
+            max-width: 950px;
+            width: 100%;
+            text-align: left;
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateX(-100px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        .info-notice h2 {
+            color: #ff6f61;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .info-notice::before {
+            content: '\1F6C8'; /* Information icon */
+            font-size: 2em;
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            background: #ff6f61;
+            color: #fff;
+            border-radius: 50%;
+            padding: 10px;
+        }
+
+        /* File List Styles */
+        .file-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        /* File List Items */
+        .file-list li {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            text-align: center;
+            animation: scaleUp 1s ease-out;
+            backdrop-filter: blur(5px);
+        }
+
+        @keyframes scaleUp {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Hover Effect for List Items */
+        .file-list li:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* File Links */
+        .file-list a {
+            text-decoration: none;
+            color: #ff6f61;
+            font-size: 1.1em;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        /* Hover Effect on Links */
+        .file-list a:hover {
+            color: #ffa500;
+        }
+
+        /* Button Style */
+        .button {
+            padding: 15px 30px;
+            font-size: 20px;
+            background: linear-gradient(135deg, #ff6f61, #ffa500);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+            margin: 10px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Documentation Links */
+        .documentation {
+            margin-top: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .documentation h2 {
+            font-size: 2em;
+            color: #ff6f61;
+            margin-bottom: 20px;
+        }
+
+        .documentation a {
+            display: inline-block;
+            color: white;
+            background: #ff6f61;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: background 0.3s ease;
+        }
+
+        .documentation a:hover {
+            background: #ffa500;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            .section-header { font-size: 2em; }
+            .file-list { grid-template-columns: 1fr; }
+        }
+
+        /* Scroll Animation */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="scroll-animate">Tasks Among Us Add-ons</h1>
+        <!-- Section for Installation -->
+        <h2 class="section-header scroll-animate">Installation</h2>
+        <p>Install the necessary dependencies to ensure all programs run smoothly. Make sure you have Python installed on your system.</p>
+        <p>Update coming soon!</p>
+        <ul class="file-list">
+            <li><a href="https://drive.google.com/file/d/1iEXiocpIHS3WjEExAZ5gxJHDvNRzfM0b/view?usp=drive_link" class="button">Install Pygame</a></li>
+            <li><a href="https://www.python.org/downloads/" target="_blank" class="button">Install Python</a></li>
+        </ul>
+
+        <!-- File Safety Notice -->
+        <div class="info-notice scroll-animate">
+            <h2>Important Notices</h2>
+            <p><strong>We recommend keeping all the files in the same directory to make the game load faster.</strong> The best option is to keep all the files in the same drive.</p>
+            <p><strong>Do not change the names of any files, or the launcher will not work correctly.</strong> File names are crucial for the proper functioning of the game launcher. Please ensure that the names remain exactly as they are when downloaded.</p>
+            <p><strong>It is important to download all the files listed below to make the game work properly.</strong> Missing files can cause the game to malfunction or not start at all.</p>
+        </div>
+
+        <!-- Section for Tasks Among Us -->
+        <h2 class="section-header scroll-animate">Tasks Among Us</h2>
+        <p>This is the original version of the game. If you want the classic experience, download the files below:</p>
+        <ul class="file-list">
+            <li><a href="https://drive.google.com/uc?export=download&id=19XadHajpOThi_-_2oDTu55kUe9iilpd9">Game Launcher</a></li>
+            <li><a href="https://drive.google.com/uc?export=download&id=1kliZq9eYqKPcdxl0F7ZbAO11kimolPZ7">Singleplayer</a></li>
+            <li><a href="https://drive.google.com/uc?export=download&id=1kUbsymO_D8txE9EVcp4iBvZkY4bcKyXX">Credits</a></li>
+            <li><a href="https://drive.google.com/uc?export=download&id=1Jep7Bl9dDFq9netCuUUjNZ1OojuEed4C">Multiplayer</a></li>
+            <li><a href="https://drive.google.com/uc?export=download&id=1hwFxJqYxoagG_oWyWAdQMd_Ghhd0nxbL">Sound File</a></li>
+        </ul>
+
+        <!-- Section for Santa Among Us -->
+        <h2 class="section-header scroll-animate">Santa Among Us</h2>
+        <p>This is the Christmas-themed version of the game. It features festive visuals and gameplay changes, such as wrapping gifts instead of regular tasks. Download the files below:</p>
+        <ul class="file-list">
+            <li><a href="https://drive.google.com/file/d/1gQCRHM8MN3BGTjf2I66weqz9Uuw03QGj/view?usp=drive_link">Santa Among Us Launcher</a></li>
+            <li><a href="https://drive.google.com/file/d/1U90aGvtP_zKutRFpx7WM6efk3o3LdW6s/view?usp=drive_link">Santa Among Us Asset</a></li>
+        </ul>
+
+        <!-- Python and Pygame Documentation -->
+        <div class="documentation scroll-animate">
+            <h2>Helpful Resources</h2>
+            <a href="https://docs.python.org/3/" target="_blank">Python Documentation</a>
+            <a href="https://www.pygame.org/docs/" target="_blank">Pygame Documentation</a>
+        </div>
+    </div>
+
+    <script>
+        // Scroll Animation Trigger
+        const scrollElements = document.querySelectorAll('.scroll-animate');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        scrollElements.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
