@@ -14,20 +14,46 @@ SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
+RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 PLAYER_SPEED = 5
 TASK_RADIUS = 30
 
-# Task Completion Variables
-TASKS_COMPLETED = 0
-TASKS_TOTAL = 3
-TASK_DURATION = 3  # seconds
-task_in_progress = False
-task_start_time = None
-
 # Set up screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Tasks Among Us")
+
+# Display Disclaimer
+def display_disclaimer():
+    screen.fill(BLACK)
+    font_size = 24  # Start with a base font size
+    line_spacing = 10  # Space between lines
+    disclaimer_text = [
+        "DISCLAIMER:",
+        "This project is not affiliated with, endorsed by, or associated with Innersloth LLC.",
+        "'Tasks Among Us' is a fan-made game, and all rights to 'Among Us' belong to Innersloth."
+    ]
+
+    # Adjust font size dynamically to fit the screen
+    while True:
+        font = pygame.font.SysFont("Arial", font_size)
+        text_surfaces = [font.render(line, True, RED if i == 0 else WHITE) for i, line in enumerate(disclaimer_text)]
+        total_height = sum(surface.get_height() for surface in text_surfaces) + (len(text_surfaces) * line_spacing)
+
+        # If the text fits within the screen height, break the loop
+        if total_height < SCREEN_HEIGHT - 100:  # Leave some margin
+            break
+        font_size -= 1  # Reduce font size if it doesn't fit
+
+    # Render and display the disclaimer text
+    y_offset = (SCREEN_HEIGHT - total_height) // 2  # Center vertically
+    for i, text_surface in enumerate(text_surfaces):
+        x_offset = (SCREEN_WIDTH - text_surface.get_width()) // 2  # Center horizontally
+        screen.blit(text_surface, (x_offset, y_offset))
+        y_offset += text_surface.get_height() + line_spacing
+
+    pygame.display.flip()
+    time.sleep(5)  # Display the disclaimer for 5 seconds
 
 # Generate stars for the background
 STARS = [(random.randint(0, SCREEN_WIDTH), random.randint(0, SCREEN_HEIGHT)) for _ in range(200)]
@@ -219,9 +245,14 @@ def start_multiplayer():
     print("Multiplayer Mode")
     launch_file("Tasks among us 1.1.3 multiplayer.py")
 
+# Display the disclaimer first
+display_disclaimer()
+
+# Start the main menu
 while True:
     selected_mode = main_menu()
     if selected_mode == "single_player":
         game_loop()
     elif selected_mode == "multiplayer":
         start_multiplayer()
+        
